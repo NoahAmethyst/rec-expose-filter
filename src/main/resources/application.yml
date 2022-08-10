@@ -1,0 +1,71 @@
+#服务配置
+server:
+  port: 8080
+  servlet:
+    context-path: /ref
+
+
+spring:
+  datasource:
+    druid:
+      username: admin
+      password: 123456
+    master:
+      url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_SCHEME}?characterEncoding=UTF-8&autoReconnect=true&serverTimezone=GMT%2B7
+    slave:
+      url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_SCHEME}?characterEncoding=UTF-8&autoReconnect=true&serverTimezone=GMT%2B7
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 初始化大小，最小，最大
+    initialSize: 5
+    minIdle: 5
+    maxActive: 50
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+
+  #redis配置
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+    password:
+    timeout: 10000
+    maxTotal: 8
+    database: 0
+
+
+google:
+  cloud:
+    project:
+      id: oye-chat
+    storage:
+      bucket: res-oyechat
+    auth:
+      credential: static/cert/oye-chat-admin.json
+      pubsubcredential: static/cert/oye-chat-pubsub.json
+      bigquerycredential: static/cert/oye-chat-bigquery.json
+
+qiniu:
+  accesskey: d-r8ZwzeVWpEkX46XAegj4vs3iLfXkEUX5neAF3A
+  secretKey: aqBX_Ag_WFJu4hUH_qi8G4U4jkW0y_xdGwF29VQ0
+  bucket: hwoye
+
+
+
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+  not-empty: true
+  identity: MYSQL
+  style: normal
+  wrap-keyword: "`{0}`"
+
+
+custom:
+  env: ${ENV}
+  oye:
+    audit:
+      notifyurl: ${OYE_AUDIT_NOTITY_URL}
+
+
